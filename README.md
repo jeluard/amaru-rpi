@@ -1,7 +1,5 @@
 A collection of details and scripts to run [amaru](https://github.com/pragma-org/amaru) and Raspberry Pis.
 
-./build-local.sh -t v0.1.0 -s MySSID -p MyPassword -k ~/.ssh/id_ed25519.pub
-
 # Build
 
 ## On RPI
