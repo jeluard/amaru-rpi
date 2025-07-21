@@ -44,14 +44,3 @@ sudo vi /etc/dphys-swapfile
 sudo dphys-swapfile setup
 sudo dphys-swapfile swapon
 ```
-
-# TODO
-
-* [ ] create full custom images via GH actions
-* [ ] add amaru binary and conf
-* [ ] provide images for RPI 4/5/Zero2
-* [ ] allow to easily access amaru dbs
-* [ ] create script for [inky](https://github.com/pimoroni/inky)
-* [ ] experiment with [pisugar](https://github.com/PiSugar/PiSugar/)
-* [ ] pretty print nice 3d enclosure
-* [ ] make sure `amaru-doctor` runs smoothly on RPI5 with a touch screen
