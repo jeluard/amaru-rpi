@@ -11,7 +11,7 @@ def fit_font(draw, text, max_width, base_size=22):
         size -= 1
     return font
 
-def create_badge(epoch: int, block: int, text_color: str, width: int, height: int):
+def create_badge(path: str, epoch: int, block: int, text_color: str, width: int, height: int):
     img = Image.new("P", (width, height), color="white")
     draw = ImageDraw.Draw(img)
     font = ImageFont.truetype("inky/resources/RobotoMono-Bold.ttf", 18)
@@ -35,16 +35,18 @@ def create_badge(epoch: int, block: int, text_color: str, width: int, height: in
     num_y = height - 18  - 10
     draw.text((num_x, num_y), big_number, fill=text_color, font=number_font)
 
-    img.save("preview.png")
+    img.save(path)
 
 def main():
     parser = argparse.ArgumentParser(description="Create a badge for a given epoch and block number.")
+    parser.add_argument("path", help="Path to the badge image", type=str)
     parser.add_argument("epoch", help="Epoch number", type=int)
     parser.add_argument("block", help="Block number", type=int)
     parser.add_argument("width", help="Width of the badge", type=int)
     parser.add_argument("height", help="Height of the badge", type=int)
+    parser.add_argument("color", help="Color of the badge", type=str)
     args = parser.parse_args()
-    create_badge(args.epoch, args.block, "red", args.width, args.height)
+    create_badge(args.path, args.epoch, args.block, args.color, args.width, args.height)
 
 if __name__ == "__main__":
     main()
