@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 from PIL import Image
 from inky.auto import auto
 

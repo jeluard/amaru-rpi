@@ -1,0 +1,29 @@
+#!/bin/bash
+
+AMARU_SYNCING="false"
+
+AMARU_TRACE="amaru=info" amaru --with-json-traces daemon \
+           --peer-address="${PEER_ADDRESS}" \
+           --listen-address="${LISTEN_ADDRESS}" \
+           --network="${NETWORK}" \
+           --chain-dir="${CHAIN_DIR}" \
+           --ledger-dir="${LEDGER_DIR}" | while read line; do
+  EVENT=$(jq -r '.fields.message' <<< "$line" 2>/dev/null)
+  SPAN=$(jq -r '.span.name' <<< "$line" 2>/dev/null)
+  if [ "$EVENT" = "exit" ] && [ "$SPAN" = "epoch_transition" ]; then
+    # Epoch transition
+    EPOCH=$(jq -r '.span.into' <<< "$line" 2>/dev/null)
+    if [[ "$AMARU_SYNCING" == "true" ]]; then
+        ./inky/display_syncing.py "$EPOCH"
+    fi
+  fi
+  if [ "$AMARU_SYNCING" = "false" ] && [ "$EVENT" = "tip_changed" ]; then
+    # New block
+    BLOCK=$(jq -r '.span.into | split(".")[0]' <<< "$line" 2>/dev/null)
+    ./inky/display_badge.py "$EPOCH" "$BLOCK"
+  fi
+  if [ "$AMARU_SYNCING" = "true" ] && [ "$EVENT" = "chain.extended" ]; then
+    # Synced
+    AMARU_SYNCING="false"
+  fi
+done
