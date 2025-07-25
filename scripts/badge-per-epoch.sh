@@ -1,5 +1,11 @@
 #!/bin/bash
 
+NETWORK=preprod
+PEER_ADDRESS=127.0.0.1:3001
+LISTEN_ADDRESS=0.0.0.0:0
+LEDGER_DIR=./ledger.$(NETWORK).db
+CHAIN_DIR=./chain.$(NETWORK).db
+
 AMARU_SYNCING="true"
 
 AMARU_TRACE="amaru=trace" amaru --with-json-traces daemon \
