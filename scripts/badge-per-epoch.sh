@@ -1,8 +1,8 @@
 #!/bin/bash
 
-AMARU_SYNCING="false"
+AMARU_SYNCING="true"
 
-AMARU_TRACE="amaru=info" amaru --with-json-traces daemon \
+AMARU_TRACE="amaru=trace" amaru --with-json-traces daemon \
            --peer-address="${PEER_ADDRESS}" \
            --listen-address="${LISTEN_ADDRESS}" \
            --network="${NETWORK}" \
@@ -19,7 +19,7 @@ AMARU_TRACE="amaru=info" amaru --with-json-traces daemon \
   fi
   if [ "$AMARU_SYNCING" = "false" ] && [ "$EVENT" = "tip_changed" ]; then
     # New block
-    BLOCK=$(jq -r '.span.into | split(".")[0]' <<< "$line" 2>/dev/null)
+    BLOCK=$(jq -r '.fields.tip | split(".")[0]' <<< "$line" 2>/dev/null)
     ./inky/display_badge.py "$EPOCH" "$BLOCK"
   fi
   if [ "$AMARU_SYNCING" = "true" ] && [ "$EVENT" = "chain.extended" ]; then

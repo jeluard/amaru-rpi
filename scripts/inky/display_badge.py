@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from create_badge import create_badge
-from bitmap_to_inky import display
+from display import display_bitmap
 from inky.auto import auto
 
 import argparse
