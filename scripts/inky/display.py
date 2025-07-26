@@ -5,7 +5,7 @@ from inky.auto import auto
 
 import argparse
 
-def display_bitmap(_path: str):
+def display_bitmap(path: str):
     # Auto-detect Inky display
     inky_display = auto()
 
