@@ -16,6 +16,10 @@ AMARU_TRACE="amaru=trace" amaru --with-json-traces daemon \
            --ledger-dir="${LEDGER_DIR}" | while read line; do
   EVENT=$(jq -r '.fields.message' <<< "$line" 2>/dev/null)
   SPAN=$(jq -r '.span.name' <<< "$line" 2>/dev/null)
+  if [ "$EVENT" = "new.known_snapshots" ]; then
+    # Epochs restored, used as initial Epoch
+    EPOCH=$(jq -r '.fields.snapshots | split("..")[1][:-1]' <<< "$line" 2>/dev/null)
+  fi
   if [ "$EVENT" = "exit" ] && [ "$SPAN" = "epoch_transition" ]; then
     # Epoch transition
     EPOCH=$(jq -r '.span.into' <<< "$line" 2>/dev/null)
