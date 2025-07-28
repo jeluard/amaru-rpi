@@ -8,7 +8,7 @@ import argparse
 def fit_font(draw, text, max_width, base_size=22):
     size = base_size
     while size > 10:
-        font = ImageFont.truetype("inky/resources/RobotoMono-Bold.ttf", size)
+        font = ImageFont.truetype(FredokaOne, size)
         if draw.textlength(text, font=font) <= max_width:
             return font
         size -= 1
