@@ -7,6 +7,7 @@ LEDGER_DIR=${LEDGER_DIR:-./ledger.${NETWORK}.db}
 CHAIN_DIR=${CHAIN_DIR:-./chain.${NETWORK}.db}
 
 AMARU_SYNCING="true"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 source ~/.virtualenvs/pimoroni/bin/activate
 
@@ -26,13 +27,13 @@ AMARU_TRACE="amaru=trace" amaru --with-json-traces daemon \
     # Epoch transition
     EPOCH=$(jq -r '.span.into' <<< "$line" 2>/dev/null)
     if [[ "$AMARU_SYNCING" == "true" ]]; then
-        ./inky/display_syncing.py "$EPOCH"
+        "$SCRIPT_DIR/inky/display_syncing.py" "$EPOCH"
     fi
   fi
   if [ "$AMARU_SYNCING" = "false" ] && [ "$EVENT" = "tip_changed" ]; then
     # New block
     BLOCK=$(jq -r '.fields.tip | split(".")[0]' <<< "$line" 2>/dev/null)
-    ./inky/display_badge.py "$EPOCH" "$BLOCK"
+    "$SCRIPT_DIR/inky/display_badge.py" "$EPOCH" "$BLOCK"
   fi
   if [ "$AMARU_SYNCING" = "true" ] && [ "$EVENT" = "chain.extended" ]; then
     # Synced
