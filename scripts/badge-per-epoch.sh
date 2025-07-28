@@ -8,6 +8,8 @@ CHAIN_DIR=${CHAIN_DIR:-./chain.${NETWORK}.db}
 
 AMARU_SYNCING="true"
 
+source ~/.virtualenvs/pimoroni/bin/activate
+
 AMARU_TRACE="amaru=trace" amaru --with-json-traces daemon \
            --peer-address="${PEER_ADDRESS}" \
            --listen-address="${LISTEN_ADDRESS}" \
