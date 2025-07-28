@@ -18,19 +18,27 @@ cargo build --release # 1 hour on RPI5
 Cross building allow to pre-create binaries for RPI on different (more powerful) machine with different architecture.
 Note that cross-building is probably better on a linux environment.
 
+### PIOS 32 bits
+
 ```shell
 cross build --target=armv7-unknown-linux-gnueabihf --release
+```
+
+### PIOS 64 bits
+
+```shell
+cross build --target=aarch64-unknown-linux-musl --release
 ```
 
 # Running
 
 Regular `amaru` commands can be used to run on an RPI. Note that it's probably a good idea to start with a fresh amaru db. Running `bootstrap` (to start from a `cardano-node` snapshot) will either be pretty slow or crash (on Pi zero).
 
-# Tweaks
+## Tweaks
 
 Some RPIs require specific configuration to be able to run `amaru`.
 
-## Pi ZERO
+### Pi ZERO
 
 Pi zero do not have any swap by default. Couple with the lower amount of ram (512MB) it won't run `amaru` OOB.
 
@@ -44,3 +52,8 @@ sudo vi /etc/dphys-swapfile
 sudo dphys-swapfile setup
 sudo dphys-swapfile swapon
 ```
+
+#### With inky eInk screen
+
+Make sure [inky]() has been properly setup.
+Then in your `amaru-rpi` folder, run: `PEER_ADDRESS=192.168.1.61:3001 PATH=$PATH:. ./scripts/badge-per-epoch.sh`
