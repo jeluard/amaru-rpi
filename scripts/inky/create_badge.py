@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 from PIL import Image, ImageDraw, ImageFont, ImageOps
+from font_fredoka_one import FredokaOne
 
 import argparse
 
@@ -16,7 +17,7 @@ def fit_font(draw, text, max_width, base_size=22):
 def create_badge(path: str, epoch: int, block: int, text_color: str, width: int, height: int):
     img = Image.new("P", (width, height), color="white")
     draw = ImageDraw.Draw(img)
-    font = ImageFont.truetype("inky/resources/RobotoMono-Bold.ttf", 18)
+    font = ImageFont.truetype(FredokaOne, 22)
 
     big_number = "#" + str(block)
 
