@@ -7,7 +7,7 @@ LEDGER_DIR=${LEDGER_DIR:-./ledger.${NETWORK}.db}
 CHAIN_DIR=${CHAIN_DIR:-./chain.${NETWORK}.db}
 
 AMARU_SYNCING="true"
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+SCRIPT_DIR="$(cd "${0%/*}" && pwd)"
 
 source ~/.virtualenvs/pimoroni/bin/activate
 
