@@ -6,6 +6,7 @@ After=network.target
 ExecStart=/home/pi/Documents/amaru-rpi/scripts/badge-per-epoch.sh
 Restart=always
 User=pi
+WorkingDirectory=/home/pi/Documents/amaru-rpi/
 EnvironmentFile=/home/pi/Documents/amaru-rpi/conf/amaru.env
 Environment="PATH=/home/pi/Documents/amaru-rpi/:${PATH}"
 
