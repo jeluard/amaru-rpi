@@ -10,7 +10,7 @@ def main():
     parser = argparse.ArgumentParser(description="Create an amaru logo.")
     args = parser.parse_args()
     inky_display = auto()
-    path = "badge.png"
+    path = "logo.png"
     color = "red"
     create_logo(path, color, inky_display.WIDTH, inky_display.HEIGHT)
     display_bitmap(path)
