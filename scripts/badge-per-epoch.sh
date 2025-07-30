@@ -11,6 +11,8 @@ SCRIPT_DIR="$(cd "${0%/*}" && pwd)"
 
 source ~/.virtualenvs/pimoroni/bin/activate
 
+"$SCRIPT_DIR/inky/display_logo.py"
+
 AMARU_TRACE="amaru=trace" amaru --with-json-traces daemon \
            --peer-address="${PEER_ADDRESS}" \
            --listen-address="${LISTEN_ADDRESS}" \
@@ -23,9 +25,9 @@ AMARU_TRACE="amaru=trace" amaru --with-json-traces daemon \
     # Epochs restored, used as initial Epoch
     EPOCH=$(jq -r '.fields.snapshots | split("..")[1][:-1]' <<< "$line" 2>/dev/null)
   fi
-  if [ "$EVENT" = "exit" ] && [ "$SPAN" = "epoch_transition" ]; then
+  if [ "$EVENT" = "exit" ] && [ "$SPAN" = "end_epoch" ]; then
     # Epoch transition
-    EPOCH=$(jq -r '.span.into' <<< "$line" 2>/dev/null)
+    EPOCH=$(jq -r '.spans[0].into' <<< "$line" 2>/dev/null)
     if [[ "$AMARU_SYNCING" == "true" ]]; then
         "$SCRIPT_DIR/inky/display_syncing.py" "$EPOCH"
     fi
