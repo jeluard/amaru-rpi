@@ -19,8 +19,6 @@ def create_logo(path: str, text_color: str, width: int, height: int):
     draw = ImageDraw.Draw(img)
     font = ImageFont.truetype(FredokaOne, 28)
 
-    big_number = "#" + str(block)
-
     # Draw label 'amaru'
     label_x, label_y = 70, 0
     draw.text((label_x, label_y), "AMARU", fill=text_color, font=font)
