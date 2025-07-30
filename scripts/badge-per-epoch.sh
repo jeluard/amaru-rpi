@@ -24,6 +24,7 @@ AMARU_TRACE="amaru=trace" amaru --with-json-traces daemon \
   if [ "$EVENT" = "new.known_snapshots" ]; then
     # Epochs restored, used as initial Epoch
     EPOCH=$(jq -r '.fields.snapshots | split("..")[1][:-1]' <<< "$line" 2>/dev/null)
+    "$SCRIPT_DIR/inky/display_syncing.py" "$EPOCH"
   fi
   if [ "$EVENT" = "exit" ] && [ "$SPAN" = "end_epoch" ]; then
     # Epoch transition
