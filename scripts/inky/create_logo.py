@@ -34,7 +34,7 @@ def main():
     parser.add_argument("height", help="Height of the badge", type=int)
     parser.add_argument("color", help="Color of the badge", type=str)
     args = parser.parse_args()
-    create_badge(args.path, args.color, args.width, args.height)
+    create_logo(args.path, args.color, args.width, args.height)
 
 if __name__ == "__main__":
     main()
