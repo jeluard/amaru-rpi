@@ -1,6 +1,3 @@
-use std::time::Duration;
-
-use ratatui::Frame;
 /// A Ratatui example that demonstrates how to handle charts.
 ///
 /// This example demonstrates how to draw various types of charts such as line, bar, and
@@ -11,11 +8,13 @@ use ratatui::Frame;
 /// release.
 ///
 /// [`latest`]: https://github.com/ratatui/ratatui/tree/latest
+use ratatui::Frame;
 use ratatui::layout::{Constraint, Layout, Rect};
 use ratatui::style::{Color, Modifier, Style, Stylize};
 use ratatui::symbols::{self, Marker};
 use ratatui::text::{Line, Span};
 use ratatui::widgets::{Axis, Block, Chart, Dataset, GraphType, LegendPosition};
+use std::time::Duration;
 
 pub struct ChartScreen {
     signal1: SinSignal,
