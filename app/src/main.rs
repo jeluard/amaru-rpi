@@ -58,7 +58,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     use rppal::gpio::Gpio;
     use rppal::hal::Delay;
     use rppal::spi::{Bus, Mode, SlaveSelect, Spi};
-    use embedded_hal::blocking::delay::DelayMs;
 
     use crate::button::Button;
 
@@ -106,7 +105,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     led_b.set_high();
 
     let di = SpiInterface::new(spi_device, dc, Box::leak(buffer));
-    let mut delay = Delay::delay_ms(10);
+    let mut delay = Delay::new();
 
     let mut display: Display<
         SpiInterface<
